@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     public function getNameAttribute($value){
         // $this->Str::ucfirst($value); //la primera letra es mayuscula
-        $this->ucwords($value);
+        return ucwords($value); //cada inicio de palabra estará en mayuscula - (Jose Polo)
     }
 
     /**

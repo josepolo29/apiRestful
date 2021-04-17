@@ -5,9 +5,17 @@ use App\Http\Controllers\Buyer\BuyerController;
 use App\Http\Controllers\Buyer\BuyerProductController;
 use App\Http\Controllers\Buyer\BuyerSellerController;
 use App\Http\Controllers\Buyer\BuyerTransactionController;
+use App\Http\Controllers\Category\CategoryBuyerController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Category\CategoryProductController;
+use App\Http\Controllers\Category\CategorySellerController;
+use App\Http\Controllers\Category\CategoryTransactionController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Seller\SellerBuyerController;
+use App\Http\Controllers\Seller\SellerCategoryController;
 use App\Http\Controllers\Seller\SellerController;
+use App\Http\Controllers\Seller\SellerProductController;
+use App\Http\Controllers\Seller\SellerTransactionController;
 use App\Http\Controllers\Transaction\TransactionCategoryController;
 use App\Http\Controllers\Transaction\TransactionController;
 use App\Http\Controllers\Transaction\TransactionSellerController;
@@ -38,6 +46,10 @@ Route::get('buyers/{buyer}/categories', BuyerCategoryController::class);
  * Categories
  */
 Route::resource('categories', CategoryController::class, ['except' => ['create', 'edit']]);
+Route::get('categories/{category}/products', CategoryProductController::class);
+Route::get('categories/{category}/sellers', CategorySellerController::class);
+Route::get('categories/{category}/transactions', CategoryTransactionController::class);
+Route::get('categories/{category}/buyers', CategoryBuyerController::class);
 
 /**
  * Products
@@ -55,6 +67,10 @@ Route::get('transactions/{transaction}/sellers', TransactionSellerController::cl
  * Sellers
  */
 Route::resource('sellers', SellerController::class, ['only' => ['index', 'show']]);
+Route::get('sellers/{seller}/transactions', SellerTransactionController::class);
+Route::get('sellers/{seller}/categories', SellerCategoryController::class);
+Route::get('sellers/{seller}/buyers', SellerBuyerController::class);
+Route::resource('sellers.products', SellerProductController::class, ['except' => ['create', 'show', 'edit']]);
 
 /**
  * Users

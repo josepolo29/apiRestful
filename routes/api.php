@@ -84,3 +84,4 @@ Route::resource('sellers.products', SellerProductController::class, ['except' =>
  * Users
  */
 Route::resource('users', UserController::class, ['except' => ['create', 'edit']]);
+Route::get('users/verify/{token}', [UserController::class, 'verify'])->name('verify');

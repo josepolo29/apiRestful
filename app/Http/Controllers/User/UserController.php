@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\ApiController;
+use App\Mail\UserCreated;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends ApiController
 {
@@ -88,7 +90,7 @@ class UserController extends ApiController
     public function update(Request $request, User $user)
     {
         $rules = [
-            'email' => 'email|unique:users, email, '.$user->id,
+            'email' => 'email|unique:users,email, '.$user->id,
             'password' => 'min:6|confirmed',
             'admin' => 'in:' . User::USUARIO_ADMINISTRADOR. ','.User::USUARIO_REGULAR,
         ];
@@ -151,5 +153,13 @@ class UserController extends ApiController
         $user->save();
 
         return $this->showMessage('La cuenta ha sido verificada');
+    }
+
+    public function resend(User $user){
+        if($user->esVerificado()) return $this->errorResponse('Este usuario ya ha sido verificado', 409);
+
+        Mail::to($user)->send(new UserCreated($user));
+
+        return $this->showMessage('El correo de verificación se ha reenviado');
     }
 }

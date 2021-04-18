@@ -36,7 +36,7 @@ class UserTransformer extends TransformerAbstract
             'identificador' => (int)$user->id,
             'nombre' => (string)$user->name,
             'correo' => (string)$user->email,
-            'verificado' => (int)$user->verified,
+            'esVerificado' => (int)$user->verified,
             'esAdministrador' => ($user->admin === 'true'),
             'fechaCreacion' => (string)$user->created_at,
             'fechaActualizacion' => (string)$user->updated_at,

@@ -42,7 +42,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             'signature:X-Application-Name',
-            'throttle:api',
+            'throttle:60,1,api', //Limitar las peticiones //METODO handler
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Transformers\UserTransformer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,8 @@ use Illuminate\Support\Str;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
+    
+    public $transformer = UserTransformer::class;
 
     const USUARIO_VERIFICADO = '1';
     const USUARIO_NO_VERIFICADO = '0';

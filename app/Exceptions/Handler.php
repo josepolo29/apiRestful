@@ -9,6 +9,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -83,6 +84,10 @@ class Handler extends ExceptionHandler
             if($code === 1451) return $this->errorResponse("No se puede eliminar de forma permanente el recurso porque está relacionado con algún otro.", 409);
         }
 
+        if($e instanceof TokenMismatchException){
+            return redirect()->back()->withInput($request->input());
+        }
+
         if(config('app.debug')){
             return parent::render($request, $e);
         }
@@ -130,6 +135,20 @@ class Handler extends ExceptionHandler
     protected function convertValidationExceptionToResponse(Throwable $e, $request)
     {
         $errors = $e->validator->errors()->getMessages();
+
+        if($this->isFrontend($request)){
+            return $request->ajax() ? response()->json($errors, 422) : redirect()
+                    ->back()
+                    ->withInput($request->input())
+                    ->withErrors($errors);
+        }
+
         return $this->errorResponse($errors, 422);
+    }
+
+    //retornando HTML y Redirecciones Cuando Sea Requerido
+
+    private function isFrontend($request){
+        return $request->acceptsHtml() && collect($request->route()->middleware())->contains('web');
     }
 }

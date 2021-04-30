@@ -39438,7 +39438,7 @@ var render = function() {
                                   }),
                                   _vm._v(
                                     "\n\n                                                " +
-                                      _vm._s(scope.description) +
+                                      _vm._s(scope.id) +
                                       "\n                                        "
                                   )
                                 ])

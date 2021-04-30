@@ -17,6 +17,7 @@ class ProductBuyerTransactionController extends ApiController
         parent::__construct();
 
         $this->middleware('transform.input:'.TransactionTransformer::class);
+        $this->middleware('scope:purchase-product');
     }
 
     /**

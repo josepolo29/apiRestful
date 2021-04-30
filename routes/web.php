@@ -36,6 +36,8 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 
 
 ROute::get('/home/my-tokens', [HomeController::class, 'getTokens'])->name('personal-tokens');
+ROute::get('/home/my-clients', [HomeController::class, 'getClients'])->name('personal-clients');
+ROute::get('/home/authorized-clients', [HomeController::class, 'getAuthorizedClients'])->name('authorized-clients');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {

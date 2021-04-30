@@ -3,7 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <passport-personal-access-tokens></passport-personal-access-tokens>
+        <div class="col-md-12">
+            <passport-personal-access-tokens></passport-personal-access-tokens>
+        </div>
     </div>
 </div>
 @endsection

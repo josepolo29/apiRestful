@@ -4,11 +4,12 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Transaction;
+use App\Traits\AdminActions;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TransactionPolicy
 {
-    use HandlesAuthorization;
+    use HandlesAuthorization, AdminActions;
 
     /**
      * Determine whether the user can view the model.

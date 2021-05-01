@@ -19,6 +19,9 @@ class BuyerSellerController extends ApiController
      */
     public function __invoke(Buyer $buyer)
     {
+
+        $this->allowedAdminAction();
+        
         //obteniendo los vendedores sin repetirlos a partir de un comprador
         //BuyeR --> Transactions <-- Product -- Seller
         $sellers = $buyer->transactions()->with('product.seller')

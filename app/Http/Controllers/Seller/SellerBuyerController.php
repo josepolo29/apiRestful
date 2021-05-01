@@ -19,6 +19,8 @@ class SellerBuyerController extends ApiController
      */
     public function __invoke(Seller $seller)
     {
+        $this->allowedAdminAction();
+        
         $trasactions = $seller->products()
                         ->whereHas('transactions')
                         ->with('transactions.buyer')

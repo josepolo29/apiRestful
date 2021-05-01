@@ -19,6 +19,8 @@ class ProductTransactionController extends ApiController
      */
     public function __invoke(Product $product)
     {
+        $this->allowedAdminAction();
+        
         $trasactions = $product->transactions;
                             
         return $this->showAll($trasactions);

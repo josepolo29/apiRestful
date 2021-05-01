@@ -19,6 +19,8 @@ class CategorySellerController extends ApiController
      */
     public function __invoke(Category $category)
     {
+        $this->allowedAdminAction();
+        
         $sellers = $category->products()->with('seller')
                     ->get()
                     ->pluck('seller')

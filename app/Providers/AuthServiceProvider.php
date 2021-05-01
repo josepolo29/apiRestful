@@ -41,6 +41,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        //definiendo Gate
+        Gate::define('admin-action', function($user){
+            return $user->esAdministrador();
+        });
+
         Passport::routes();
 
         //Una vez que el token expira, el cliente tiene un maximo de 30 dias para utilizar un refresh token y obtener

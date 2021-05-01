@@ -19,6 +19,8 @@ class ProductBuyerController extends ApiController
      */
     public function __invoke(Product $product)
     {
+        $this->allowedAdminAction();
+        
         $buyers = $product->transactions()
                         ->with('buyer')
                         ->get()

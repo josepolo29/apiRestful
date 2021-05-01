@@ -13,10 +13,10 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\user  $model
+     * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function view(User $authenticatedUser, user $user)
+    public function view(User $authenticatedUser, User $user)
     {
         return $authenticatedUser->id === $user->id;
     }
@@ -26,10 +26,10 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\user  $model
+     * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function update(User $authenticatedUser, user $user)
+    public function update(User $authenticatedUser, User $user)
     {
         return $authenticatedUser->id === $user->id;
     }
@@ -38,10 +38,10 @@ class UserPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\user  $model
+     * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function delete(User $authenticatedUser, user $user)
+    public function delete(User $authenticatedUser, User $user)
     {
         return $authenticatedUser->id === $user->id && $authenticatedUser->token()->client->personal_access_client;
     }

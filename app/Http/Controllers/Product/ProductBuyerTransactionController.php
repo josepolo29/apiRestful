@@ -18,7 +18,7 @@ class ProductBuyerTransactionController extends ApiController
 
         $this->middleware('transform.input:'.TransactionTransformer::class);
         $this->middleware('scope:purchase-product');
-        $this->middleware('can:purchase,buyer');
+        // $this->middleware('can:purchase,buyer');
     }
 
     /**
@@ -38,13 +38,13 @@ class ProductBuyerTransactionController extends ApiController
             return $this->errorResponse('El comprador debe ser diferente al vendedor', 409);
         }
 
-        if(!$buyer->esVerificado()){
-            return $this->errorResponse('El comprador debe ser un usuario verificado', 409);
-        }
+        // if(!$buyer->esVerificado()){
+        //     return $this->errorResponse('El comprador debe ser un usuario verificado', 409);
+        // }
 
-        if(!$product->seller->esVerificado()){
-            return $this->errorResponse('El vendedor debe ser un usuario verificado', 409);
-        }
+        // if(!$product->seller->esVerificado()){
+        //     return $this->errorResponse('El vendedor debe ser un usuario verificado', 409);
+        // }
 
         if(!$product->estaDisponible()){
             return $this->errorResponse('El producto para esta transacción no está disponible', 409);

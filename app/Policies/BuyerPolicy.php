@@ -30,9 +30,9 @@ class BuyerPolicy
      * @param  \App\Models\Buyer  $buyer
      * @return mixed
      */
-    public function purchase(User $user, Buyer $buyer)
-    {
-        return $user->id === $buyer->id;
-    }
+    // public function purchase(User $user, Buyer $buyer)
+    // {
+    //     return $user->id === $buyer->id;
+    // }
 
 }
